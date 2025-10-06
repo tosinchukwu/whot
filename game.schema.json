@@ -1,0 +1,120 @@
+{
+  "name": "Game",
+  "type": "object",
+  "properties": {
+    "room_name": {
+      "type": "string",
+      "description": "Name of the game room"
+    },
+    "host_email": {
+      "type": "string",
+      "description": "Email of the player who created the game"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "waiting",
+        "in_progress",
+        "finished"
+      ],
+      "default": "waiting",
+      "description": "Current game status"
+    },
+    "players": {
+      "type": "array",
+      "description": "List of player emails in the game",
+      "items": {
+        "type": "string"
+      }
+    },
+    "current_turn_email": {
+      "type": "string",
+      "description": "Email of player whose turn it is"
+    },
+    "deck": {
+      "type": "array",
+      "description": "Remaining cards in deck",
+      "items": {
+        "type": "object",
+        "properties": {
+          "shape": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "discard_pile": {
+      "type": "array",
+      "description": "Cards that have been played",
+      "items": {
+        "type": "object",
+        "properties": {
+          "shape": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "last_played_card": {
+      "type": "object",
+      "description": "The card currently on top of discard pile",
+      "properties": {
+        "shape": {
+          "type": "string"
+        },
+        "number": {
+          "type": "integer"
+        }
+      }
+    },
+    "player_hands": {
+      "type": "object",
+      "description": "Each player's cards",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "shape": {
+              "type": "string"
+            },
+            "number": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "winner_email": {
+      "type": "string",
+      "description": "Email of the winner"
+    },
+    "active_effect": {
+      "type": "object",
+      "description": "Current special card effect in play",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        }
+      }
+    },
+    "max_players": {
+      "type": "integer",
+      "default": 4,
+      "description": "Maximum number of players"
+    }
+  },
+  "required": [
+    "room_name",
+    "host_email"
+  ]
+}
